@@ -20,9 +20,6 @@ public class MainController {
     private WeatherDownloader weatherDownloader;
     private IconDownloader iconDownloader;
     private PreferenceManager preferenceManager;
-    private JSONObject jsonObject;
-    private JSONArray jsonArray;
-    private String partString;
 
     public MainController(MainActivity mainActivity)
     {
@@ -49,9 +46,9 @@ public class MainController {
         }
 
         try {
-            jsonObject = new JSONObject(mainModel.getSiteResult());
-            partString = jsonObject.getString("weather");
-            jsonArray = new JSONArray(partString);
+            JSONObject jsonObject = new JSONObject(mainModel.getSiteResult());
+            String partString = jsonObject.getString("weather");
+            JSONArray jsonArray = new JSONArray(partString);
 
             for(int i = 0; i < jsonArray.length(); i++)
             {
