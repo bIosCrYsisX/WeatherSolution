@@ -1,13 +1,15 @@
 package tk.dalpiazsolutions.weathersolution;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
+
+import tk.dalpiazsolutions.weathersolution.DataBase.DBController;
+import tk.dalpiazsolutions.weathersolution.DataBase.Entity.Place;
 
 /**
  * Created by Christoph on 03.04.2018.
@@ -20,15 +22,14 @@ public class MainController {
     private WeatherDownloader weatherDownloader;
     private IconDownloader iconDownloader;
     private PreferenceManager preferenceManager;
-    private JSONObject jsonObject;
-    private JSONArray jsonArray;
-    private String partString;
+    private DBController dbController;
 
     public MainController(MainActivity mainActivity)
     {
         this.mainActivity = mainActivity;
         mainModel = new MainModel(mainActivity);
         preferenceManager = new PreferenceManager(mainActivity);
+        dbController = new DBController(mainActivity);
     }
 
     public void getWeather()
@@ -37,11 +38,9 @@ public class MainController {
         mainModel.setPlace(preferenceManager.getPlace());
         //The string resource file, which contains the app-id, is not public!
         mainModel.setUrl(String.format(Locale.getDefault(), mainActivity.getString(R.string.jsonURL), mainActivity.getString(R.string.appid), mainModel.getPlace().toLowerCase()));
-        Log.i("url", mainModel.getUrl());
 
         try {
             mainModel.setSiteResult(weatherDownloader.execute(mainModel.getUrl()).get().toString());
-            Log.i("site", mainModel.getSiteResult());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -49,9 +48,9 @@ public class MainController {
         }
 
         try {
-            jsonObject = new JSONObject(mainModel.getSiteResult());
-            partString = jsonObject.getString("weather");
-            jsonArray = new JSONArray(partString);
+            JSONObject jsonObject = new JSONObject(mainModel.getSiteResult());
+            String partString = jsonObject.getString("weather");
+            JSONArray jsonArray = new JSONArray(partString);
 
             for(int i = 0; i < jsonArray.length(); i++)
             {
@@ -72,6 +71,18 @@ public class MainController {
                 mainModel.setPressure(jsonObject.getInt("pressure"));
                 mainModel.setHumidity(jsonObject.getInt("humidity"));
             }
+
+            jsonObject = new JSONObject(mainModel.getSiteResult());
+            mainModel.setCity(jsonObject.getString("name"));
+
+            jsonObject = new JSONObject(mainModel.getSiteResult());
+            partString = jsonObject.getString("sys");
+            jsonObject = new JSONObject(partString);
+
+            for(int i = 0; i < jsonObject.length(); i++)
+            {
+                mainModel.setCountry(jsonObject.getString("country"));
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -87,5 +98,28 @@ public class MainController {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Place> getPlaces()
+    {
+        mainModel = dbController.getAll(mainModel);
+        return mainModel.getPlaces();
+    }
+
+    public void addPlace(String placeText)
+    {
+        Place place = new Place();
+        place.setPlace(placeText);
+        dbController.insert(place);
+    }
+
+    public int getCount()
+    {
+        return dbController.getCount();
+    }
+
+    public void deleteAll()
+    {
+        dbController.dropTable();
     }
 }

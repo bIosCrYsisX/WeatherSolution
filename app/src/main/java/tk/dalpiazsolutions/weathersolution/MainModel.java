@@ -2,6 +2,10 @@ package tk.dalpiazsolutions.weathersolution;
 
 import android.graphics.Bitmap;
 
+import java.util.List;
+
+import tk.dalpiazsolutions.weathersolution.DataBase.Entity.Place;
+
 /**
  * Created by Christoph on 03.04.2018.
  */
@@ -9,6 +13,7 @@ import android.graphics.Bitmap;
 public class MainModel {
 
     private MainActivity mainActivity;
+    private List<Place> places;
     private String siteResult;
     private String url;
     private String place;
@@ -19,6 +24,8 @@ public class MainModel {
     private double temperature;
     private int pressure;
     private int humidity;
+    private String city;
+    private String country;
 
     public MainModel(MainActivity mainActivity)
     {
@@ -123,5 +130,31 @@ public class MainModel {
     public void iconChanged()
     {
         mainActivity.updateIcon(icon);
+    }
+
+    public List<Place> getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(List<Place> places) {
+        this.places = places;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+        propertyChanged();
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+        propertyChanged();
     }
 }

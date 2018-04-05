@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 
 /**
  * Created by Christoph on 03.04.2018.

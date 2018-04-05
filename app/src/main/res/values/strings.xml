@@ -1,19 +1,15 @@
 <resources>
     <string name="app_name">WeatherSolution</string>
-    <string name="linz">Linz</string>
-    <string name="wien">Wien</string>
-    <string name="graz">Graz</string>
-    <string name="salzburg">Salzburg</string>
-    <string name="klagenfurt">Klagenfurt</string>
-    <string name="eisenstadt">Eisenstadt</string>
-    <string name="bregenz">Bregenz</string>
-    <string name="stpoelten">St. Pölten</string>
-    <string name="innsbruck">Innsbruck</string>
+    <string name="newyork">New York</string>
     <string name="icon">Icon</string>
     <string name="weather">Weather</string>
     <string name="temp">Temperature</string>
     <string name="pressure">Pressure</string>
     <string name="humidity">Humidity</string>
+    <string name="addplace">Add Place</string>
+    <string name="place">Place</string>
+    <string name="deleteAll">Delete all</string>
+    <string name="countryPlace">%1$s, %2$s</string>
     <string name="iconURL">http://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/%1$s.png</string>
-    <string name="jsonURL">http://api.openweathermap.org/data/2.5/weather?appid=%1$s&amp;q=%2$s,AT</string>
+    <string name="jsonURL">http://api.openweathermap.org/data/2.5/weather?appid=%1$s&amp;q=%2$s</string>
 </resources>
