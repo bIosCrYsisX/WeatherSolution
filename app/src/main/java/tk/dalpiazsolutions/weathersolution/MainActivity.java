@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     TextView txtHumidity;
     TextView txtCityCountry;
     EditText txtNewPlace;
+    TextView txtWind;
     Button mbuttonAddNewPlace;
     DecimalFormat decimalFormat;
     String[] places;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         txtPressure = findViewById(R.id.textPressure);
         txtHumidity = findViewById(R.id.textHumidity);
         txtCityCountry = findViewById(R.id.textCityCountry);
+        txtWind = findViewById(R.id.textWind);
 
         preferenceManager = new PreferenceManager(this);
 
@@ -86,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         txtPressure.setText(Integer.toString(mainModel.getPressure()) + " mbar");
         txtHumidity.setText(Integer.toString(mainModel.getHumidity()) + " %");
         txtCityCountry.setText(String.format(Locale.getDefault(), getString(R.string.countryPlace), mainModel.getCity(), mainModel.getCountry()));
+        txtWind.setText(Double.toString(mainModel.getWindSpeed()) + " m/s,  " + mainModel.getWindDirection() + "° " + "(" + mainModel.getTextWindDirection() + ")");
     }
 
     public void updateIcon(Bitmap bitmap)

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Wetter</string>
+    <string name="weather">Wetter</string>
+    <string name="temp">Temperatur</string>
+    <string name="pressure">Luftdruck</string>
+    <string name="humidity">Luftfeuchtigkeit</string>
+    <string name="wind">Wind</string>
+    <string name="addplace">Ort hinzufügen</string>
+    <string name="place">Ort</string>
+    <string name="deleteAll">Alle löschen</string>
+</resources>

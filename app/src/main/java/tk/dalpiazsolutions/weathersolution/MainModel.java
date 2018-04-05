@@ -26,6 +26,9 @@ public class MainModel {
     private int humidity;
     private String city;
     private String country;
+    private double windSpeed;
+    private int windDirection;
+    private String textWindDirection;
 
     public MainModel(MainActivity mainActivity)
     {
@@ -155,6 +158,33 @@ public class MainModel {
 
     public void setCountry(String country) {
         this.country = country;
+        propertyChanged();
+    }
+
+    public double getWindSpeed() {
+        return windSpeed;
+    }
+
+    public void setWindSpeed(double windSpeed) {
+        this.windSpeed = windSpeed;
+        propertyChanged();
+    }
+
+    public int getWindDirection() {
+        return windDirection;
+    }
+
+    public void setWindDirection(int windDirection) {
+        this.windDirection = windDirection;
+        propertyChanged();
+    }
+
+    public String getTextWindDirection() {
+        return textWindDirection;
+    }
+
+    public void setTextWindDirection(String textWindDirection) {
+        this.textWindDirection = textWindDirection;
         propertyChanged();
     }
 }

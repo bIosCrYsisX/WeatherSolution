@@ -83,6 +83,18 @@ public class MainController {
             {
                 mainModel.setCountry(jsonObject.getString("country"));
             }
+
+            jsonObject = new JSONObject(mainModel.getSiteResult());
+            partString = jsonObject.getString("wind");
+            jsonObject = new JSONObject(partString);
+
+            for(int i = 0; i < jsonObject.length(); i++)
+            {
+                mainModel.setWindSpeed(jsonObject.getDouble("speed"));
+                mainModel.setWindDirection(jsonObject.getInt("deg"));
+            }
+
+            mainModel.setTextWindDirection(checkWindDirection());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -121,5 +133,28 @@ public class MainController {
     public void deleteAll()
     {
         dbController.dropTable();
+    }
+
+    public String checkWindDirection()
+    {
+        double windDirection = mainModel.getWindDirection();
+
+        if(windDirection == 0 || windDirection == 360) {
+            return "N";
+        } else if(windDirection > 0 && windDirection < 90) {
+            return "NO";
+        } else if(windDirection == 90) {
+            return "O";
+        } else if(windDirection > 90 && windDirection < 180) {
+            return "SO";
+        } else if(windDirection == 180){
+            return "S";
+        } else if(windDirection > 180 && windDirection < 270) {
+            return "SW";
+        } else if(windDirection == 270) {
+            return "W";
+        } else if(windDirection > 270 && windDirection < 360) {
+            return "NW";
+        } else return null;
     }
 }
