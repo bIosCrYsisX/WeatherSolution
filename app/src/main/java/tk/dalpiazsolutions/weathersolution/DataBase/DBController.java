@@ -41,4 +41,9 @@ public class DBController {
     {
         placeFacade.dropTable();
     }
+
+    public void deleteByName(String name)
+    {
+        placeFacade.deleteByName(name);
+    }
 }

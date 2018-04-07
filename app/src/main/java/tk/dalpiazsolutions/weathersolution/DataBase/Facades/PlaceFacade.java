@@ -48,4 +48,9 @@ public class PlaceFacade {
     {
         PlaceRepository.getInstance(context).dropTable();
     }
+
+    public void deleteByName(String name)
+    {
+        PlaceRepository.getInstance(context).deleteByName(name);
+    }
 }

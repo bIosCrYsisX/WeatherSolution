@@ -9,4 +9,9 @@
     <string name="addplace">Ort hinzufügen</string>
     <string name="place">Ort</string>
     <string name="deleteAll">Alle löschen</string>
+    <string name="save">Speichern</string>
+    <string name="settings">Einstellungen</string>
+    <string name="pleaseenter">Bitte einen Ort eingeben!</string>
+    <string name="back">Zurück</string>
+    <string name="deleteSelected">Ausgewählte löschen</string>
 </resources>

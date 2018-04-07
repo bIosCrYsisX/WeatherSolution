@@ -12,4 +12,5 @@ public interface Repository<T> {
     T find(int id);
     void update(T entity);
     void dropTable();
+    void deleteByName(String name);
 }

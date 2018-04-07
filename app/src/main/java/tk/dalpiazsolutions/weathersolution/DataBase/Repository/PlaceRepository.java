@@ -4,9 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 import tk.dalpiazsolutions.weathersolution.DataBase.Contracts.PlaceContract;
 import tk.dalpiazsolutions.weathersolution.DataBase.DBHelper;
@@ -73,6 +75,14 @@ public class PlaceRepository implements Repository<Place> {
         contentValues.put(PlaceContract.Columns.PLACE, entity.getPlace());
 
         database.insert(PlaceContract.TABLE, null, contentValues);
+    }
+
+    @Override
+    public void deleteByName(String name) {
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+
+        Log.e("sql", "DELETE FROM " + "CONTRACT" + " WHERE " + "Place" + " LIKE " + "'%" + name + "%'");
+        database.execSQL("DELETE FROM " + PlaceContract.TABLE + " WHERE " + PlaceContract.Columns.PLACE + " LIKE " + "'%" + name + "%'");
     }
 
     @Override

@@ -130,11 +130,6 @@ public class MainController {
         return dbController.getCount();
     }
 
-    public void deleteAll()
-    {
-        dbController.dropTable();
-    }
-
     public String checkWindDirection()
     {
         double windDirection = mainModel.getWindDirection();

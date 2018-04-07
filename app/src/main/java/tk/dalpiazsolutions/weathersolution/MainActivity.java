@@ -1,5 +1,6 @@
 package tk.dalpiazsolutions.weathersolution;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Locale;
 
 import tk.dalpiazsolutions.weathersolution.DataBase.Entity.Place;
+import tk.dalpiazsolutions.weathersolution.Settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     EditText txtNewPlace;
     TextView txtWind;
     Button mbuttonAddNewPlace;
+    Button mbuttonDeleteAll;
     DecimalFormat decimalFormat;
     String[] places;
 
@@ -51,6 +54,16 @@ public class MainActivity extends AppCompatActivity {
             mainController.addPlace(getString(R.string.newyork));
         }
 
+        mbuttonDeleteAll = findViewById(R.id.button);
+
+        mbuttonDeleteAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         mbuttonAddNewPlace = findViewById(R.id.buttonAddPlace);
         txtNewPlace = findViewById(R.id.textNewPlace);
         iconView = findViewById(R.id.iconView);
@@ -73,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         setSpinnerSelection();
         getWeather();
     }
+
 
     public void getWeather()
     {
@@ -105,26 +119,6 @@ public class MainActivity extends AppCompatActivity {
         {
             this.places[i] = places.get(i).getPlace();
         }
-    }
-
-    public void addPlace(View view)
-    {
-        String place = txtNewPlace.getText().toString();
-        preferenceManager.savePlace(place);
-        mainController.addPlace(place);
-        setPlacesArray();
-        setArrayAdapter();
-        setSpinnerSelection();
-    }
-
-    public void deletePlaces(View view)
-    {
-        mainController.deleteAll();
-        mainController.addPlace(getString(R.string.newyork));
-        preferenceManager.savePlace(getString(R.string.newyork));
-        setPlacesArray();
-        setArrayAdapter();
-        setSpinnerSelection();
     }
 
     public void setArrayAdapter()
