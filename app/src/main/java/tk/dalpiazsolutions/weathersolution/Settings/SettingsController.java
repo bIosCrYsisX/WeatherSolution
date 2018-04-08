@@ -11,6 +11,7 @@ import tk.dalpiazsolutions.weathersolution.DataBase.Entity.Place;
 import tk.dalpiazsolutions.weathersolution.MainActivity;
 import tk.dalpiazsolutions.weathersolution.MainModel;
 import tk.dalpiazsolutions.weathersolution.PreferenceManager;
+import tk.dalpiazsolutions.weathersolution.R;
 
 /**
  * Created by Christoph on 07.04.2018.
@@ -96,5 +97,16 @@ public class SettingsController {
     public void savePlace(String place)
     {
         preferenceManager.savePlace(place);
+    }
+
+    public void checkDeletedPlace()
+    {
+        for(int i = 0; i < settingsModel.getPlacesToDelete().size(); i++)
+        {
+            if(preferenceManager.getPlace().equals(settingsModel.getPlacesToDelete().get(i)))
+            {
+                savePlace(settingsActivity.getString(R.string.newyork));
+            }
+        }
     }
 }

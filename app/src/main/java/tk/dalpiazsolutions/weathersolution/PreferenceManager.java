@@ -18,12 +18,11 @@ public class PreferenceManager {
     {
         this.context = context;
         preferences = context.getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE);
-
     }
 
     public String getPlace()
     {
-        return preferences.getString(PLACE, "Linz");
+        return preferences.getString(PLACE, context.getString(R.string.newyork));
     }
 
     public void savePlace(String place)

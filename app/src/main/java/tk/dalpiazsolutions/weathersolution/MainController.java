@@ -1,5 +1,7 @@
 package tk.dalpiazsolutions.weathersolution;
 
+import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,13 +36,21 @@ public class MainController {
 
     public void getWeather()
     {
+        mainModel.setNoResult(false);
         weatherDownloader = new WeatherDownloader();
         mainModel.setPlace(preferenceManager.getPlace());
         //The string resource file, which contains the app-id, is not public!
         mainModel.setUrl(String.format(Locale.getDefault(), mainActivity.getString(R.string.jsonURL), mainActivity.getString(R.string.appid), mainModel.getPlace().toLowerCase()));
 
         try {
-            mainModel.setSiteResult(weatherDownloader.execute(mainModel.getUrl()).get().toString());
+            mainModel.setSiteResult(weatherDownloader.execute(mainModel.getUrl()).get());
+
+            if(mainModel.getSiteResult() == null)
+            {
+                Toast.makeText(mainActivity.getApplicationContext(), mainActivity.getString(R.string.noresult), Toast.LENGTH_LONG).show();
+                mainModel.setNoResult(true);
+                return;
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -102,6 +112,10 @@ public class MainController {
 
     public void getIcon()
     {
+        if(mainModel.isNoResult())
+        {
+            return;
+        }
         iconDownloader = new IconDownloader();
         try {
             mainModel.setIcon(iconDownloader.execute(String.format(Locale.getDefault(), mainActivity.getString(R.string.iconURL), mainModel.getIconID())).get());

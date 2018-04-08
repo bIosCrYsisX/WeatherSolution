@@ -29,6 +29,7 @@ public class MainModel {
     private double windSpeed;
     private int windDirection;
     private String textWindDirection;
+    private boolean noResult;
 
     public MainModel(MainActivity mainActivity)
     {
@@ -186,5 +187,13 @@ public class MainModel {
     public void setTextWindDirection(String textWindDirection) {
         this.textWindDirection = textWindDirection;
         propertyChanged();
+    }
+
+    public boolean isNoResult() {
+        return noResult;
+    }
+
+    public void setNoResult(boolean noResult) {
+        this.noResult = noResult;
     }
 }

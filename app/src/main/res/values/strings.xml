@@ -15,6 +15,7 @@
     <string name="settings">Settings</string>
     <string name="pleaseenter">Please enter a place!</string>
     <string name="back">Back</string>
+    <string name="noresult">Couldn´t load data! Please check place!</string>
     <string name="deleteSelected">Delete selected</string>
     <string name="countryPlace" translatable="false">%1$s, %2$s</string>
     <string name="iconURL" translatable="false">http://openweathermap.org/themes/openweathermap/assets/vendor/owm/img/widgets/%1$s.png</string>

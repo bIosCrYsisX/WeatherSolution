@@ -87,6 +87,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void save(View view)
     {
+        settingsController.checkDeletedPlace();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();

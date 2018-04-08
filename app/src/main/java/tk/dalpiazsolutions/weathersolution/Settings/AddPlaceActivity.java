@@ -54,7 +54,7 @@ public class AddPlaceActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(charSequence.toString().length() != 0) {
-                    checkSuggest(charSequence.toString().substring(0, 1).toUpperCase() + charSequence.toString().substring(1));
+                    checkSuggest(charSequence.toString().toLowerCase());
                     txtSuggest.setText(suggestion);
                 }
             }
@@ -100,7 +100,7 @@ public class AddPlaceActivity extends AppCompatActivity {
     {
         for(int i = 0; i < suggestions.length; i++)
         {
-            if (suggestions[i].indexOf(text) > -1)
+            if (suggestions[i].toLowerCase().indexOf(text) > -1)
             {
                 suggestion = suggestions[i];
             }
