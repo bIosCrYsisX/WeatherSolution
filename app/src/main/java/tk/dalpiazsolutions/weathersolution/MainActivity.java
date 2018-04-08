@@ -102,7 +102,16 @@ public class MainActivity extends AppCompatActivity {
         txtPressure.setText(Integer.toString(mainModel.getPressure()) + " mbar");
         txtHumidity.setText(Integer.toString(mainModel.getHumidity()) + " %");
         txtCityCountry.setText(String.format(Locale.getDefault(), getString(R.string.countryPlace), mainModel.getCity(), mainModel.getCountry()));
-        txtWind.setText(Double.toString(mainModel.getWindSpeed()) + " m/s,  " + mainModel.getWindDirection() + "° " + "(" + mainModel.getTextWindDirection() + ")");
+
+        if(mainModel.getWindDirection() == - 1)
+        {
+            txtWind.setText(Double.toString(mainModel.getWindSpeed()) + " m/s,  " + getString(R.string.na));
+        }
+
+        else
+        {
+            txtWind.setText(Double.toString(mainModel.getWindSpeed()) + " m/s,  " + mainModel.getWindDirection() + "° " + mainModel.getTextWindDirection());
+        }
     }
 
     public void updateIcon(Bitmap bitmap)

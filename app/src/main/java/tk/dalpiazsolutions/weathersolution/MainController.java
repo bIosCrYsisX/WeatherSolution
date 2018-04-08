@@ -1,5 +1,6 @@
 package tk.dalpiazsolutions.weathersolution;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -107,6 +108,10 @@ public class MainController {
             mainModel.setTextWindDirection(checkWindDirection());
         } catch (JSONException e) {
             e.printStackTrace();
+            if(e.getMessage().contains("deg"))
+            {
+                mainModel.setWindDirection(-1);
+            }
         }
     }
 
@@ -146,24 +151,24 @@ public class MainController {
 
     public String checkWindDirection()
     {
-        double windDirection = mainModel.getWindDirection();
+        int windDirection = mainModel.getWindDirection();
 
         if(windDirection == 0 || windDirection == 360) {
-            return "N";
+            return "(N)";
         } else if(windDirection > 0 && windDirection < 90) {
-            return "NO";
+            return "(NO)";
         } else if(windDirection == 90) {
-            return "O";
+            return "(O)";
         } else if(windDirection > 90 && windDirection < 180) {
-            return "SO";
+            return "(SO)";
         } else if(windDirection == 180){
-            return "S";
+            return "(S)";
         } else if(windDirection > 180 && windDirection < 270) {
-            return "SW";
+            return "(SW)";
         } else if(windDirection == 270) {
-            return "W";
+            return "(W)";
         } else if(windDirection > 270 && windDirection < 360) {
-            return "NW";
-        } else return null;
+            return "(NW)";
+        } else return "";
     }
 }
